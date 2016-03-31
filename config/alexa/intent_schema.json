@@ -1,0 +1,40 @@
+{
+  "intents": [
+    {
+      "intent": "StartBotTender"
+    },
+    {
+      "intent": "OrderDrink",
+      "slots": [
+        {
+          "name": "drink",
+          "type": "Drink"
+        }
+      ]
+    },
+    {
+      "intent": "RequestIngredients",
+      "slots": [
+        {
+          "name": "ingredient",
+          "type": "Ingredient"
+        }
+      ]
+    },
+    {
+      "intent": "AMAZON.YesIntent"
+    },
+    {
+      "intent": "AMAZON.NoIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    }
+  ]
+}

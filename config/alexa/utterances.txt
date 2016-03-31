@@ -1,0 +1,6 @@
+StartBotTender make me a drink
+StartBotTender make me a cocktail
+
+OrderDrink make me a {drink}
+
+RequestIngredients something with {ingredient} in it please
