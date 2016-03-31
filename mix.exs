@@ -29,7 +29,7 @@ defmodule BotTenderSkill.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:alexa, "~> 0.1.11"},
+      {:alexa, "~> 0.1.13"},
       {:poison, "~> 2.0"},
       {:inflex, "~> 1.5.0"},
       {:espec, "~> 0.8.16", only: :test}
