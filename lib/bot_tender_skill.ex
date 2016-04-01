@@ -19,8 +19,29 @@ defmodule BotTenderSkill do
   end
 
   def handle_intent("AMAZON.YesIntent", request, response) do
+    question = Request.attribute(request, "question")
+    handle_yes(request, response, question)
+  end
+
+  def handle_intent("AMAZON.NoIntent", request, response) do
+    question = Request.attribute(request, "question")
+    handle_no(request, response, question)
+  end
+
+  defp handle_yes(request, response, "GlassReady") do
+    drink = request
+      |> Request.attribute("drink")
+      |> Drink.drink_with_name
     response
-      |> say("Pouring your Long Island Ice Tea now.")
+      |> say("Pouring your #{drink.name} now.")
+      |> should_end_session(true)
+  end
+
+  defp handle_no(request, response, "GlassReady") do
+    response
+      |> copy_attributes(request)
+      |> say("Sorry but I can’t pour you a drink until your glass is ready. I'll wait.")
+      |> reprompt("Is your glass ready yet?")
       |> should_end_session(true)
   end
 

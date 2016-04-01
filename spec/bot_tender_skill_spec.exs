@@ -71,12 +71,32 @@ defmodule BotTenderSkillSpec do
   end
 
   context "confirm drink" do
+    let :attributes, do: %{"drink" => "Long Island Iced Tea", "question" => "GlassReady"}
+
     describe "yes" do
-      let :request, do: intent_request(@app_id, "AMAZON.YesIntent", nil, nil, %{"drink" => "Long Island Iced Tea"})
+      let :request, do: intent_request(@app_id, "AMAZON.YesIntent", nil, nil, attributes)
       subject do: Alexa.handle_request(request)
 
       it "should tell the user the drink is pouring" do
-        expect say(subject) |> to(eq "Pouring your Long Island Ice Tea now.")
+        expect say(subject) |> to(eq "Pouring your Long Island Iced Tea now.")
+      end
+    end
+
+    describe "no" do
+      let :request, do: intent_request(@app_id, "AMAZON.NoIntent", nil, nil, attributes)
+      subject do: Alexa.handle_request(request)
+
+      it "should tell the user we cannot pour without a glass" do
+        expect say(subject) |> to(eq "Sorry but I can’t pour you a drink until your glass is ready. I'll wait.")
+      end
+      it "should reprompt the use to see if the glass is ready" do
+        expect reprompt(subject) |> to(eq "Is your glass ready yet?")
+      end
+      it "should set the question context to 'GlassReady'" do
+        expect Response.attribute(subject, "question") |> to(eq "GlassReady")
+      end
+      it "should set the drink in the session attributes" do
+        expect Response.attribute(subject, "drink") |> to(eq "Long Island Iced Tea")
       end
     end
   end

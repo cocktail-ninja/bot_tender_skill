@@ -1,4 +1,4 @@
-%{"alexa": {:hex, :alexa, "0.1.13"},
+%{"alexa": {:git, "https://github.com/col/alexa.git", "251136aef44223eb96ed0fc2e1004a411059a452", []},
   "espec": {:hex, :espec, "0.8.16"},
   "espec_phoenix": {:hex, :espec_phoenix, "0.2.0"},
   "floki": {:hex, :floki, "0.7.2"},
